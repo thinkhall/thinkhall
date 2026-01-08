@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Providers from "@/components/SessionProvider";
+import { Toaster } from "sonner";
+import ClientLayout from "@/components/ClientLayout"; // Ensure this is imported
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,7 +30,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <Providers>
+          {/* ClientLayout handles hiding Nav/Footer logic */}
+          <ClientLayout>{children}</ClientLayout>
+
+          <Toaster position="top-right" richColors />
+        </Providers>
       </body>
     </html>
   );

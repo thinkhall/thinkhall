@@ -475,7 +475,7 @@ export default function InteractiveDashboard() {
                 </p>
                 <p className="text-[11px] opacity-80">XP</p>
               </div>
-              <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-xl p-3 text-white">
+              <div className="bg-gradient-to-br from-slate-500 to-slate-700 rounded-xl p-3 text-white">
                 <Medal className="w-4 h-4 mb-1.5" />
                 <p className="text-xl font-bold">{LEARNER_DATA.badges}</p>
                 <p className="text-[11px] opacity-80">Badges</p>
