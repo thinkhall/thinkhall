@@ -31,8 +31,8 @@ INSTALLATION
 
 1. Clone the repository
 
-git clone [https://github.com/your-username/your-repo-name.git](https://github.com/your-username/your-repo-name.git)
-cd your-repo-name
+git clone [https://github.com/thinkhall/thinkhall.git]( https://github.com/thinkhall/thinkhall.git)
+cd thinkhall
 
 2. Install dependencies
 
