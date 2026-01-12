@@ -75,7 +75,7 @@ export default function Sidebar() {
       {/* User / Logout */}
       <div className="p-4 border-t border-white/10">
         <button
-          onClick={() => signOut({ callbackUrl: "/login" })}
+          onClick={() => signOut({ callbackUrl: "/" })}
           className="flex items-center gap-3 px-4 py-3 w-full rounded-xl text-sm font-medium text-gray-400 hover:bg-red-500/10 hover:text-red-500 transition-colors"
         >
           <LogOut className="w-5 h-5" />

@@ -10,6 +10,7 @@ import {
   AlertCircle,
   CheckCircle,
 } from "lucide-react";
+import LogoutButton from "@/components/ui/LogoutButton";
 
 export default async function ManagerDashboard() {
   const user = await requireRole(["manager", "org_admin", "super_admin"]);
@@ -22,6 +23,7 @@ export default async function ManagerDashboard() {
         <p className="mt-2 opacity-90">
           Welcome back, {user.name} • {user.designation || "Manager"}
         </p>
+        <LogoutButton/>
       </div>
 
       {/* Team Stats */}

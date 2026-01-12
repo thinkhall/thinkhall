@@ -1,22 +1,21 @@
 // app/employee/dashboard/page.tsx
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { requireAuth } from "@/lib/auth";
-import {
-  BookOpen,
-  Trophy,
-  Clock,
-  Target,
-  TrendingUp,
-  Calendar,
-} from "lucide-react";
+import { BookOpen, Trophy, Clock, Target, Calendar } from "lucide-react";
+import LogoutButton from "@/components/ui/LogoutButton";
 
 export default async function EmployeeDashboard() {
   const user = await requireAuth();
 
   return (
     <div className="p-6 space-y-6">
-      {/* Welcome Section */}
-      <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 text-white">
+      {/* Welcome Section with Logout Button */}
+      <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-6 text-white relative">
+        {/* Logout Button - Top Right */}
+        <div className="absolute top-4 right-4">
+          <LogoutButton/>
+        </div>
+
         <h1 className="text-3xl font-bold">Welcome back, {user.name}!</h1>
         <p className="mt-2 opacity-90">
           {user.designation || "Employee"} • {user.level} Level

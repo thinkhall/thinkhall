@@ -8,39 +8,37 @@ import {
   ArrowRight,
   Menu,
   X,
-  LayoutGrid,
-  Info,
-  Building2,
-  BrainCircuit,
+  Info, // For About Us
+  Building2, // For Enterprises Solution
+  BrainCircuit, // Re-imported for "Meet Thinkmate"
+  Users, // Still imported, but not used for "Meet Thinkmate" now
 } from "lucide-react";
+import { useSession } from "next-auth/react"; // Import useSession
 
-// Updated Navigation Items with Icons
-// Ordered to keep "AI Coach" somewhat central
+// Updated Navigation Items with "New" badge and BrainCircuit icon for "Meet Thinkmate"
 const navItems = [
   {
-    label: "Platform",
-    href: "/platform",
-    icon: LayoutGrid,
-  },
-  {
-    label: "Enterprise Solutions",
-    href: "/enterprise",
-    icon: Building2,
-  },
-  {
-    label: "AI Coach",
-    href: "/ai-coach",
-    badge: "New",
-    icon: BrainCircuit,
-  },
-  {
-    label: "About",
+    label: "About Us",
     href: "/about",
     icon: Info,
+  },
+  {
+    label: "Meet Thinkmate", // Label
+    href: "/meet-us",
+    icon: BrainCircuit, // Changed icon to BrainCircuit
+    badge: "New", // Added "New" badge
+  },
+  {
+    label: "Enterprises Solution",
+    href: "/enterprise",
+    icon: Building2,
   },
 ];
 
 export default function Navigation() {
+  const { data: session, status } = useSession(); // Get session data and status
+  const isLoggedIn = status === "authenticated"; // Check if user is logged in
+
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeItem, setActiveItem] = useState<string | null>(null);
@@ -61,6 +59,11 @@ export default function Navigation() {
       document.body.style.overflow = "unset";
     };
   }, [mobileMenuOpen]);
+
+  // Determine the "Get Started" button's text and href based on login status
+  const authButtonText = isLoggedIn ? "Dashboard" : "Get Started";
+  // The middleware will handle redirecting from /dashboard to role-specific dashboards
+  const authButtonHref = isLoggedIn ? "/dashboard" : "/login";
 
   return (
     <>
@@ -118,7 +121,7 @@ export default function Navigation() {
                         }`}
                       />
                       {item.label}
-                      {item.badge && (
+                      {item.badge && ( // Badge rendering is active here
                         <span className="px-1.5 py-0.5 text-[10px] font-bold bg-gradient-to-r from-orange-500 to-red-500 text-white rounded shadow-sm">
                           {item.badge}
                         </span>
@@ -139,13 +142,17 @@ export default function Navigation() {
                 Book a Demo
               </Link>
 
-              {/* Get Started */}
+              {/* Get Started / Dashboard Button */}
               <Link
-                href="/login"
+                href={authButtonHref} // Dynamic href
                 className="bg-gray-900 hover:bg-gray-800 text-white text-sm font-medium px-5 py-2.5 rounded-full transition-colors shadow-lg shadow-gray-900/10"
               >
-                <span className="hidden sm:inline">Get Started</span>
-                <span className="sm:hidden">Start</span>
+                <span className="hidden sm:inline">{authButtonText}</span>{" "}
+                {/* Dynamic text */}
+                <span className="sm:hidden">
+                  {isLoggedIn ? "Dash" : "Start"}
+                </span>{" "}
+                {/* Dynamic text for mobile */}
               </Link>
 
               {/* Mobile Menu Toggle */}
@@ -203,7 +210,7 @@ export default function Navigation() {
                       }`}
                     />
                     {item.label}
-                    {item.badge && (
+                    {item.badge && ( // Badge rendering is active here
                       <span className="px-1.5 py-0.5 text-[10px] font-bold bg-gradient-to-r from-orange-500 to-red-500 text-white rounded shadow-sm">
                         {item.badge}
                       </span>
@@ -251,7 +258,7 @@ export default function Navigation() {
                         </div>
                         <span className="flex items-center gap-2">
                           {item.label}
-                          {item.badge && (
+                          {item.badge && ( // Badge rendering is active here
                             <span className="px-1.5 py-0.5 text-[10px] font-bold bg-orange-500 text-white rounded">
                               {item.badge}
                             </span>
@@ -275,11 +282,11 @@ export default function Navigation() {
                     Book a Demo
                   </Link>
                   <Link
-                    href="/login"
+                    href={authButtonHref} // Dynamic href
                     className="block w-full text-center bg-gray-900 hover:bg-gray-800 text-white px-4 py-3 rounded-xl font-medium transition-colors shadow-lg shadow-gray-900/10"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    Get Started
+                    {authButtonText} {/* Dynamic text */}
                   </Link>
                 </div>
               </div>

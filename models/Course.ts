@@ -141,6 +141,7 @@ export interface ICourse extends Document {
   // Content
   modules: IModule[];
 
+  
   // Instructor
   instructorId?: Types.ObjectId;
   instructorName?: string;
